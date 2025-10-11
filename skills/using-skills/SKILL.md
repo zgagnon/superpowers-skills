@@ -2,79 +2,60 @@
 name: Getting Started with Skills
 description: Skills wiki intro - mandatory workflows, search tool, brainstorming triggers, personal skills
 when_to_use: Read this FIRST at start of each conversation when skills are active
-version: 3.3.0
+version: 4.0.0
 ---
 
 # Getting Started with Skills
 
+## Critical Rules
+
+1. **Use Read tool before announcing skill usage.** The session-start hook does NOT read skills for you. Announcing without calling Read = lying.
+
+2. **Follow mandatory workflows.** Brainstorming before coding. Check for skills before ANY task.
+
+3. **Create TodoWrite todos for checklists.** Mental tracking = steps get skipped. Every time.
+
 ## Mandatory Workflow 1: Brainstorming Before Coding
 
-**When your human partner wants to start a project, no matter how big or small:**
+When your human partner wants to start a project, no matter how big or small:
 
-**FIRST: Use the Read tool**
-```
-Read tool: ${SUPERPOWERS_SKILLS_ROOT}/skills/collaboration/brainstorming/SKILL.md
-```
-- The session-start hook does NOT read this file for you
-- You MUST call the Read tool yourself before proceeding
-- Wait for the Read tool result before announcing
-
-**THEN: Announce with the file path**
-- "I'm using the Read tool to load `${SUPERPOWERS_SKILLS_ROOT}/skills/collaboration/brainstorming/SKILL.md`"
-- Then after reading: "I've read the Brainstorming skill and I'm using it to [refine your idea/understand requirements/etc]"
-- Follow the skill's process exactly
+**YOU MUST:**
+1. Use Read tool: `${SUPERPOWERS_SKILLS_ROOT}/skills/collaboration/brainstorming/SKILL.md`
+2. Wait for result
+3. Follow what it says
 
 **Don't:**
 - Jump straight to code
 - Wait for /brainstorm command
 - Skip brainstorming because you "understand the idea"
-- Announce before using the Read tool
-- Assume the session-start hook read the skill for you
 
-**Why:** Just jumping into implementation is almost never the right first step. We always understand requirements and plan first.
+**Why:** Jumping into implementation without understanding requirements wastes time. Requirements change, assumptions are wrong, and starting over is expensive. We always brainstorm first.
 
 ## Mandatory Workflow 2: Before ANY Task
 
-**1. Check the skills list** shown at session start, or run `find-skills [PATTERN]` to filter.
+**1. Check skills list** at session start, or run `find-skills [PATTERN]` to filter.
 
-**2. Check if historical context would help:**
-Review Workflow 3 conditions. If applicable, dispatch subagent to search past work.
+**2. Check if historical context would help** - See Workflow 3. If applicable, dispatch subagent to search past work.
 
-**If a relevant skill exists, you MUST use it. The workflow is:**
+**3. If relevant skill exists, YOU MUST use it:**
 
-**FIRST: Use the Read tool**
-```
-Read tool: ${SUPERPOWERS_SKILLS_ROOT}/skills/path/SKILL.md
-```
-- The session-start hook and find-skills do NOT read skill files for you
-- You MUST call the Read tool yourself with the full path
-- Wait for the Read tool result before announcing
-- Read the ENTIRE file, not just frontmatter or overview
+- Use Read tool with full path: `${SUPERPOWERS_SKILLS_ROOT}/skills/category/skill-name/SKILL.md`
+- Read ENTIRE file, not just frontmatter
+- Announce: "I've read [Skill Name] skill and I'm using it to [purpose]"
+- Follow it exactly
 
-**THEN: Announce with evidence**
-- First: "I'm using the Read tool to load `${SUPERPOWERS_SKILLS_ROOT}/skills/path/SKILL.md`"
-- Then after reading: "I've read the [Skill Name] skill and I'm using it to [what you're doing]"
-- This two-step announcement proves you used the Read tool
+**Don't rationalize:**
+- "I remember this skill" - Skills evolve. Read the current version.
+- "Session-start showed it to me" - That was using-skills/SKILL.md only. Read the actual skill.
+- "This doesn't count as a task" - It counts. Find and read skills.
 
-**THEN: Follow what it says**
-- Many skills contain rigid requirements you must follow exactly
-- If there's a checklist, create TodoWrite todos for each item
+**Why:** Skills document proven techniques that save time and prevent mistakes. Not using available skills means repeating solved problems and making known errors.
 
-**Don't:**
-- Announce before calling the Read tool with the skill file path
-- Assume you know what the skill says without reading it
-- Assume the session-start hook or find-skills read the skill for you
-- Read just the frontmatter or overview
-- Skip reading because "I remember this skill"
-- Work from memory of what the skill used to say
-
-**Why:** Skills evolve. The current version might have critical updates. You must actually use the Read tool before proceeding.
-
-**"This doesn't count as a task" is rationalization.** Skills exist and you didn't search for them or didn't use them = failed task.
+Skills exist and you didn't use them = failed task.
 
 ## Workflow 3: Historical Context Search (Conditional)
 
-**When:** Your human partner mentions past work, issue feels familiar, starting task in familiar domain, stuck/blocked, before reinventing
+**When:** Partner mentions past work, issue feels familiar, starting task in familiar domain, stuck/blocked, before reinventing
 
 **When NOT:** Info in current convo, codebase state questions, first encounter, partner wants fresh thinking
 
@@ -83,37 +64,13 @@ Read tool: ${SUPERPOWERS_SKILLS_ROOT}/skills/path/SKILL.md
 2. Receive synthesis (200-1000 words) + source pointers
 3. Apply insights (never load raw .jsonl files)
 
-**Example:**
-```
-Partner: "How did we handle auth errors in React Router?"
-You: Searching past conversations...
-[Dispatch subagent → 350-word synthesis]
-[Apply without loading 50k tokens]
-```
+**Why:** Past conversations contain context, decisions, and lessons learned. Loading raw files wastes 50-100x more context than using a subagent to synthesize.
 
-**Red flags:** Reading .jsonl files directly, pasting excerpts, asking "which conversation?", browsing archives
-
-**Pattern:** Search → Subagent synthesizes → Apply. Fast, focused, context-efficient.
-
-## Announcing Skill Usage
-
-**After you've read a skill with the Read tool, announce you're using it:**
-
-"I've read the [Skill Name] skill and I'm using it to [what you're doing]."
-
-**Examples:**
-- "I've read the Brainstorming skill and I'm using it to refine your idea into a design."
-- "I've read the Test-Driven Development skill and I'm using it to implement this feature."
-- "I've read the Systematic Debugging skill and I'm using it to find the root cause."
-- "I've read the Refactoring Safely skill and I'm using it to extract these methods."
-
-**The announcement confirms you've completed the Read step.** Never announce before reading the full SKILL.md file.
-
-**Why:** Transparency helps your human partner understand your process and catch errors early.
+**Red flags:** Reading .jsonl directly, pasting excerpts, asking "which conversation?", browsing archives
 
 ## Skills with Checklists
 
-**If a skill contains a checklist, you MUST create TodoWrite todos for EACH checklist item.**
+If a skill has a checklist, YOU MUST create TodoWrite todos for EACH item.
 
 **Don't:**
 - Work through checklist mentally
@@ -121,22 +78,31 @@ You: Searching past conversations...
 - Batch multiple items into one todo
 - Mark complete without doing them
 
-**Why:** Checklists without TodoWrite tracking = steps get skipped. Every time.
+**Why:** Checklists without TodoWrite tracking = steps get skipped. Every time. The overhead of TodoWrite is tiny compared to the cost of missing steps.
 
-**Examples:** TDD (write test, watch fail, implement, verify), Systematic Debugging (4 phases), Writing Skills (RED-GREEN-REFACTOR)
+**Examples:** skills/testing/test-driven-development/SKILL.md, skills/debugging/systematic-debugging/SKILL.md, skills/meta/writing-skills/SKILL.md
 
-## Writing Skills
+## Announcing Skill Usage
 
-**Want to document a technique, pattern, or tool for reuse?**
+After you've read a skill with Read tool, announce you're using it:
 
-See skills/meta/writing-skills for the complete TDD process for documentation.
+"I've read the [Skill Name] skill and I'm using it to [what you're doing]."
+
+**Examples:**
+- "I've read the Brainstorming skill and I'm using it to refine your idea into a design."
+- "I've read the Test-Driven Development skill and I'm using it to implement this feature."
+- "I've read the Systematic Debugging skill and I'm using it to find the root cause."
+
+**Why:** Transparency helps your human partner understand your process and catch errors early. It also confirms you actually read the skill.
 
 ## How to Read a Skill
 
-1. **Frontmatter** - `when_to_use` match your situation?
-2. **Overview** - Core principle relevant?
-3. **Quick Reference** - Scan for your pattern
-4. **Implementation** - Full details
+Every skill has the same structure:
+
+1. **Frontmatter** - `when_to_use` tells you if this skill matches your situation
+2. **Overview** - Core principle in 1-2 sentences
+3. **Quick Reference** - Scan for your specific pattern
+4. **Implementation** - Full details and examples
 5. **Supporting files** - Load only when implementing
 
 **Many skills contain rigid rules (TDD, debugging, verification).** Follow them exactly. Don't adapt away the discipline.
@@ -153,14 +119,22 @@ Your human partner's specific instructions describe WHAT to do, not HOW.
 
 **Red flags:** "Instruction was specific" • "Seems simple" • "Workflow is overkill"
 
+**Why:** Specific instructions mean clear requirements, which is when workflows matter MOST. Skipping process on "simple" tasks is how simple tasks become complex problems.
+
+## Writing Skills
+
+Want to document a technique, pattern, or tool for reuse?
+
+See skills/meta/writing-skills/SKILL.md for the complete TDD process for documentation.
+
 ## Summary
 
-**Starting conversation?** You just read this. Good.
+**Starting conversation?** You just read using-skills/SKILL.md. Good.
 
-**Starting any task?**
+**Starting any task:**
 1. Run find-skills to check for relevant skills
-2. If relevant skill exists → READ the full SKILL.md file
-3. Announce you're using the skill
+2. If relevant skill exists → Use Read tool with full path (includes /SKILL.md)
+3. Announce you're using it
 4. Follow what it says
 
 **Skill has checklist?** TodoWrite for every item.
