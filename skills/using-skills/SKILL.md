@@ -8,7 +8,7 @@ version: 3.1.0
 # Getting Started with Skills
 
 Skills live in two places:
-- **Core:** `${CLAUDE_PLUGIN_ROOT}/skills/` (from plugin)
+- **Core:** `${SUPERPOWERS_SKILLS_ROOT}/skills/` (from skills repository)
 - **Personal:** `~/.config/superpowers/skills/` (yours to create)
 
 Personal skills shadow core when names match. To load `skills/path/name`, check personal first, then core.
@@ -47,7 +47,7 @@ Review Workflow 3 conditions. If applicable, dispatch subagent to search past wo
 **When NOT:** Info in current convo, codebase state questions, first encounter, partner wants fresh thinking
 
 **How (use subagent for 50-100x context savings):**
-1. Dispatch subagent with template: `${CLAUDE_PLUGIN_ROOT}/skills/collaboration/remembering-conversations/tool/prompts/search-agent.md`
+1. Dispatch subagent with template: `${SUPERPOWERS_SKILLS_ROOT}/skills/collaboration/remembering-conversations/tool/prompts/search-agent.md`
 2. Receive synthesis (200-1000 words) + source pointers
 3. Apply insights (never load raw .jsonl files)
 

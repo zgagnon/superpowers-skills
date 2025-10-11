@@ -248,7 +248,7 @@ Use path format without `@` prefix or `/SKILL.md` suffix:
 
 **Why no @ links:** `@` syntax force-loads files immediately, consuming 200k+ context before you need them.
 
-**To read a skill reference:** Use Read tool on `${CLAUDE_PLUGIN_ROOT}/skills/category/skill-name/SKILL.md`
+**To read a skill reference:** Use Read tool on `${SUPERPOWERS_SKILLS_ROOT}/skills/category/skill-name/SKILL.md`
 
 ## Flowchart Usage
 

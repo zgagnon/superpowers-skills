@@ -19,7 +19,7 @@ Examples:
 
 The script will be found at:
   1. ~/.config/superpowers/<skill-relative-path> (personal, if exists)
-  2. ${CLAUDE_PLUGIN_ROOT}/<skill-relative-path> (core plugin)
+  2. ${SUPERPOWERS_SKILLS_ROOT}/<skill-relative-path> (core skills repository)
 EOF
     exit 1
 fi
