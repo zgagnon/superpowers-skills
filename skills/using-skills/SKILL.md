@@ -27,12 +27,21 @@ version: 3.1.0
 **2. Check if historical context would help:**
 Review Workflow 3 conditions. If applicable, dispatch subagent to search past work.
 
-**If skills found:**
-1. READ the skill (`${SUPERPOWERS_SKILLS_ROOT}/skills/path/SKILL.md`)
-2. ANNOUNCE usage: "I'm using the [Skill Name] skill"
-3. FOLLOW the skill (many are rigid requirements)
+**If a relevant skill exists, you MUST use it. Using a skill means:**
 
-**"This doesn't count as a task" is rationalization.** Skills/conversations exist and you didn't search for them or didn't use them = failed task.
+1. **READ the full skill file** - `${SUPERPOWERS_SKILLS_ROOT}/skills/path/SKILL.md`
+2. **ANNOUNCE usage** - "I'm using the [Skill Name] skill to [what you're doing]"
+3. **FOLLOW the skill** - Many contain rigid requirements you must follow exactly
+
+**Don't:**
+- Assume you know what the skill says without reading it
+- Read just the frontmatter or overview
+- Skip reading because "I remember this skill"
+- Work from memory of what the skill used to say
+
+**Why:** Skills evolve. The current version might have critical updates. Reading the full skill file is non-negotiable.
+
+**"This doesn't count as a task" is rationalization.** Skills exist and you didn't search for them or didn't use them = failed task.
 
 ## Workflow 3: Historical Context Search (Conditional)
 
@@ -117,8 +126,12 @@ Your human partner's specific instructions describe WHAT to do, not HOW.
 
 **Starting conversation?** You just read this. Good.
 
-**Starting any task?** Run find-skills first, announce usage, follow what you find.
+**Starting any task?**
+1. Run find-skills to check for relevant skills
+2. If relevant skill exists → READ the full SKILL.md file
+3. Announce you're using the skill
+4. Follow what it says
 
 **Skill has checklist?** TodoWrite for every item.
 
-**Skills are mandatory when they exist, not optional.**
+**Finding a relevant skill = mandatory to read and use it. Not optional.**
