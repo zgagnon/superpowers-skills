@@ -31,7 +31,8 @@ EXAMPLES:
   find-skills 'test.*driven|TDD'     # Regex pattern
 
 OUTPUT:
-  Each line shows: skill-path - description
+  Each line shows: skill-path/SKILL.md - description
+  Paths include /SKILL.md for direct use with Read tool
   Personal skills listed first, then core skills
   Personal skills shadow core skills when paths match
 
@@ -52,12 +53,12 @@ get_description() {
     grep "^description:" "$file" 2>/dev/null | sed 's/description: *//' || echo ""
 }
 
-# Function to get relative skill path
+# Function to get relative skill path (includes /SKILL.md)
 get_skill_path() {
     local file="$1"
     local base_dir="$2"
     local rel_path="${file#$base_dir/}"
-    echo "${rel_path%/SKILL.md}"
+    echo "$rel_path"
 }
 
 # Collect all matching skills (use simple list for bash 3.2 compatibility)
