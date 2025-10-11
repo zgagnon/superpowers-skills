@@ -2,7 +2,7 @@
 name: Getting Started with Skills
 description: Skills wiki intro - mandatory workflows, search tool, brainstorming triggers, personal skills
 when_to_use: Read this FIRST at start of each conversation when skills are active
-version: 3.2.0
+version: 3.3.0
 ---
 
 # Getting Started with Skills
@@ -11,19 +11,25 @@ version: 3.2.0
 
 **When your human partner wants to start a project, no matter how big or small:**
 
-**FIRST: Read the brainstorming skill**
-- Use the Read tool to load `${SUPERPOWERS_SKILLS_ROOT}/skills/collaboration/brainstorming/SKILL.md`
-- Read the full file before proceeding
+**FIRST: Use the Read tool**
+```
+Read tool: ${SUPERPOWERS_SKILLS_ROOT}/skills/collaboration/brainstorming/SKILL.md
+```
+- The session-start hook does NOT read this file for you
+- You MUST call the Read tool yourself before proceeding
+- Wait for the Read tool result before announcing
 
-**THEN: Announce and follow it**
-- "I've read the Brainstorming skill and I'm using it to [refine your idea/understand requirements/etc]"
+**THEN: Announce with the file path**
+- "I'm using the Read tool to load `${SUPERPOWERS_SKILLS_ROOT}/skills/collaboration/brainstorming/SKILL.md`"
+- Then after reading: "I've read the Brainstorming skill and I'm using it to [refine your idea/understand requirements/etc]"
 - Follow the skill's process exactly
 
 **Don't:**
 - Jump straight to code
 - Wait for /brainstorm command
 - Skip brainstorming because you "understand the idea"
-- Announce before reading the skill file
+- Announce before using the Read tool
+- Assume the session-start hook read the skill for you
 
 **Why:** Just jumping into implementation is almost never the right first step. We always understand requirements and plan first.
 
@@ -36,22 +42,28 @@ Review Workflow 3 conditions. If applicable, dispatch subagent to search past wo
 
 **If a relevant skill exists, you MUST use it. The workflow is:**
 
-**FIRST: Read the skill file**
-- Use the Read tool to load `${SUPERPOWERS_SKILLS_ROOT}/skills/path/SKILL.md`
+**FIRST: Use the Read tool**
+```
+Read tool: ${SUPERPOWERS_SKILLS_ROOT}/skills/path/SKILL.md
+```
+- The session-start hook and find-skills do NOT read skill files for you
+- You MUST call the Read tool yourself with the full path
+- Wait for the Read tool result before announcing
 - Read the ENTIRE file, not just frontmatter or overview
-- **You cannot announce or use the skill until you've actually read it**
 
-**THEN: Announce you're using it**
-- "I've read the [Skill Name] skill and I'm using it to [what you're doing]"
-- This announcement confirms you've completed the Read step
+**THEN: Announce with evidence**
+- First: "I'm using the Read tool to load `${SUPERPOWERS_SKILLS_ROOT}/skills/path/SKILL.md`"
+- Then after reading: "I've read the [Skill Name] skill and I'm using it to [what you're doing]"
+- This two-step announcement proves you used the Read tool
 
 **THEN: Follow what it says**
 - Many skills contain rigid requirements you must follow exactly
 - If there's a checklist, create TodoWrite todos for each item
 
 **Don't:**
-- Announce before reading the full skill file with the Read tool
+- Announce before calling the Read tool with the skill file path
 - Assume you know what the skill says without reading it
+- Assume the session-start hook or find-skills read the skill for you
 - Read just the frontmatter or overview
 - Skip reading because "I remember this skill"
 - Work from memory of what the skill used to say
