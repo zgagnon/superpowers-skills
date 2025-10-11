@@ -12,7 +12,7 @@ languages: all
 
 **Writing skills IS Test-Driven Development applied to process documentation.**
 
-**All personal skills are written to `~/.config/superpowers/skills/`** - this is your personal superpowers repository, separate from the core superpowers library.
+**Skills are written to `${SUPERPOWERS_SKILLS_ROOT}/skills/` (cloned to `~/.config/superpowers/skills/`).** You edit skills in your local branch of this repository.
 
 You write test cases (pressure scenarios with subagents), watch them fail (baseline behavior), write the skill (documentation), watch tests pass (agents comply), and refactor (close loopholes).
 
@@ -71,16 +71,16 @@ API docs, syntax guides, tool documentation (office docs)
 
 ## Directory Structure
 
-**All skills are written to `~/.config/superpowers/skills/`:**
+**All skills are in the skills repository at `${SUPERPOWERS_SKILLS_ROOT}/skills/`:**
 
 ```
-~/.config/superpowers/skills/
+${SUPERPOWERS_SKILLS_ROOT}/skills/
   skill-name/
     SKILL.md              # Main reference (required)
     supporting-file.*     # Only if needed
 ```
 
-**Flat namespace** - all personal skills in one searchable location
+**Flat namespace** - all skills in one searchable location
 
 **Separate files for:**
 1. **Heavy reference** (100+ lines) - API docs, comprehensive syntax
@@ -585,16 +585,15 @@ Deploying untested skills = deploying untested code. It's a violation of quality
 - [ ] Supporting files only for tools or heavy reference
 
 **Deployment:**
-- [ ] Commit skill to git (in `~/.config/superpowers/`)
-- [ ] Push to GitHub (if remote configured)
-- [ ] Consider sharing via skills/meta/sharing-skills (if broadly useful)
+- [ ] Commit skill to git and push to your fork (if configured)
+- [ ] Consider contributing back via PR (if broadly useful)
 
 ## Discovery Workflow
 
 How future Claude finds your skill:
 
 1. **Encounters problem** ("tests are flaky")
-2. **Searches skills** using `find-skills` tool (checks personal then core)
+2. **Searches skills** using `find-skills` tool (searches skills repository)
 3. **Finds SKILL.md** (rich when_to_use matches)
 4. **Scans overview** (is this relevant?)
 5. **Reads patterns** (quick reference table)

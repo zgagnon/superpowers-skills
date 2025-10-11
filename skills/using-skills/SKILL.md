@@ -7,11 +7,9 @@ version: 3.1.0
 
 # Getting Started with Skills
 
-Skills live in two places:
-- **Core:** `${SUPERPOWERS_SKILLS_ROOT}/skills/` (from skills repository)
-- **Personal:** `~/.config/superpowers/skills/` (yours to create)
+Skills live in ONE repository at `${SUPERPOWERS_SKILLS_ROOT}/skills/` which is cloned to `~/.config/superpowers/skills/`.
 
-Personal skills shadow core when names match. To load `skills/path/name`, check personal first, then core.
+You work on your own branch in this repository and can edit any skill. Changes are committed to your local branch.
 
 ## Mandatory Workflow 1: Brainstorming Before Coding
 
@@ -34,7 +32,7 @@ Personal skills shadow core when names match. To load `skills/path/name`, check 
 Review Workflow 3 conditions. If applicable, dispatch subagent to search past work.
 
 **If skills found:**
-1. READ the skill - check personal first (`~/.config/superpowers/skills/path/SKILL.md`), then core (`~/.claude/plugins/cache/superpowers/skills/path/SKILL.md`)
+1. READ the skill (`${SUPERPOWERS_SKILLS_ROOT}/skills/path/SKILL.md`)
 2. ANNOUNCE usage: "I'm using the [Skill Name] skill"
 3. FOLLOW the skill (many are rigid requirements)
 
@@ -97,7 +95,7 @@ You: Searching past conversations...
 
 See skills/meta/writing-skills for the complete TDD process for documentation.
 
-Personal skills go in `~/.config/superpowers/skills/` and shadow core skills when names match.
+Skills live in `${SUPERPOWERS_SKILLS_ROOT}/skills/` - you can edit any skill and commit changes to your branch.
 
 ## How to Read a Skill
 
