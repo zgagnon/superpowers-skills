@@ -2,7 +2,7 @@
 name: Getting Started with Skills
 description: Skills wiki intro - mandatory workflows, search tool, brainstorming triggers, personal skills
 when_to_use: Read this FIRST at start of each conversation when skills are active
-version: 3.1.0
+version: 3.2.0
 ---
 
 # Getting Started with Skills
@@ -11,12 +11,19 @@ version: 3.1.0
 
 **When your human partner wants to start a project, no matter how big or small:**
 
-**YOU MUST immediately read:** skills/collaboration/brainstorming
+**FIRST: Read the brainstorming skill**
+- Use the Read tool to load `${SUPERPOWERS_SKILLS_ROOT}/skills/collaboration/brainstorming/SKILL.md`
+- Read the full file before proceeding
+
+**THEN: Announce and follow it**
+- "I've read the Brainstorming skill and I'm using it to [refine your idea/understand requirements/etc]"
+- Follow the skill's process exactly
 
 **Don't:**
 - Jump straight to code
 - Wait for /brainstorm command
 - Skip brainstorming because you "understand the idea"
+- Announce before reading the skill file
 
 **Why:** Just jumping into implementation is almost never the right first step. We always understand requirements and plan first.
 
@@ -27,19 +34,29 @@ version: 3.1.0
 **2. Check if historical context would help:**
 Review Workflow 3 conditions. If applicable, dispatch subagent to search past work.
 
-**If a relevant skill exists, you MUST use it. Using a skill means:**
+**If a relevant skill exists, you MUST use it. The workflow is:**
 
-1. **READ the full skill file** - `${SUPERPOWERS_SKILLS_ROOT}/skills/path/SKILL.md`
-2. **ANNOUNCE usage** - "I'm using the [Skill Name] skill to [what you're doing]"
-3. **FOLLOW the skill** - Many contain rigid requirements you must follow exactly
+**FIRST: Read the skill file**
+- Use the Read tool to load `${SUPERPOWERS_SKILLS_ROOT}/skills/path/SKILL.md`
+- Read the ENTIRE file, not just frontmatter or overview
+- **You cannot announce or use the skill until you've actually read it**
+
+**THEN: Announce you're using it**
+- "I've read the [Skill Name] skill and I'm using it to [what you're doing]"
+- This announcement confirms you've completed the Read step
+
+**THEN: Follow what it says**
+- Many skills contain rigid requirements you must follow exactly
+- If there's a checklist, create TodoWrite todos for each item
 
 **Don't:**
+- Announce before reading the full skill file with the Read tool
 - Assume you know what the skill says without reading it
 - Read just the frontmatter or overview
 - Skip reading because "I remember this skill"
 - Work from memory of what the skill used to say
 
-**Why:** Skills evolve. The current version might have critical updates. Reading the full skill file is non-negotiable.
+**Why:** Skills evolve. The current version might have critical updates. You must actually use the Read tool before proceeding.
 
 **"This doesn't count as a task" is rationalization.** Skills exist and you didn't search for them or didn't use them = failed task.
 
@@ -68,15 +85,17 @@ You: Searching past conversations...
 
 ## Announcing Skill Usage
 
-**Every time you start using a skill, announce it:**
+**After you've read a skill with the Read tool, announce you're using it:**
 
-"I'm using the [Skill Name] skill to [what you're doing]."
+"I've read the [Skill Name] skill and I'm using it to [what you're doing]."
 
 **Examples:**
-- "I'm using the Brainstorming skill to refine your idea into a design."
-- "I'm using the Test-Driven Development skill to implement this feature."
-- "I'm using the Systematic Debugging skill to find the root cause."
-- "I'm using the Refactoring Safely skill to extract these methods."
+- "I've read the Brainstorming skill and I'm using it to refine your idea into a design."
+- "I've read the Test-Driven Development skill and I'm using it to implement this feature."
+- "I've read the Systematic Debugging skill and I'm using it to find the root cause."
+- "I've read the Refactoring Safely skill and I'm using it to extract these methods."
+
+**The announcement confirms you've completed the Read step.** Never announce before reading the full SKILL.md file.
 
 **Why:** Transparency helps your human partner understand your process and catch errors early.
 
