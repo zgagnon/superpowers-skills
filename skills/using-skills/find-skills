@@ -133,9 +133,9 @@ fi
 # Sort and display results
 printf "%s\n" "${results[@]}" | sort | while IFS='|' read -r skill_path description; do
     if [[ -n "$description" ]]; then
-        echo "skills/$skill_path - $description"
+        echo "$skill_path - $description"
     else
-        echo "skills/$skill_path"
+        echo "$skill_path"
     fi
 done
 
