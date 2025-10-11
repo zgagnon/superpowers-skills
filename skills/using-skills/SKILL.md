@@ -7,10 +7,6 @@ version: 3.1.0
 
 # Getting Started with Skills
 
-Skills live in ONE repository at `${SUPERPOWERS_SKILLS_ROOT}/skills/` which is cloned to `~/.config/superpowers/skills/`.
-
-You work on your own branch in this repository and can edit any skill. Changes are committed to your local branch.
-
 ## Mandatory Workflow 1: Brainstorming Before Coding
 
 **When your human partner wants to start a project, no matter how big or small:**
@@ -94,8 +90,6 @@ You: Searching past conversations...
 **Want to document a technique, pattern, or tool for reuse?**
 
 See skills/meta/writing-skills for the complete TDD process for documentation.
-
-Skills live in `${SUPERPOWERS_SKILLS_ROOT}/skills/` - you can edit any skill and commit changes to your branch.
 
 ## How to Read a Skill
 
