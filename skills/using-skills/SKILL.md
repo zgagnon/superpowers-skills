@@ -20,7 +20,7 @@ version: 4.0.0
 
 **1. Check skills list** at session start, or run `find-skills [PATTERN]` to filter.
 
-**2. Check if historical context would help** - See Workflow 3. If applicable, dispatch subagent to search past work.
+**2. Check if historical context would help** - See Workflow 2. If applicable, dispatch subagent to search past work.
 
 **3. If relevant skill exists, YOU MUST use it:**
 
