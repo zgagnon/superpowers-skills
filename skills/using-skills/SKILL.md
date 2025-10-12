@@ -15,23 +15,8 @@ version: 4.0.0
 
 3. **Create TodoWrite todos for checklists.** Mental tracking = steps get skipped. Every time.
 
-## Mandatory Workflow 1: Brainstorming Before Coding
 
-When your human partner wants to start a project, no matter how big or small:
-
-**YOU MUST:**
-1. Use Read tool: `${SUPERPOWERS_SKILLS_ROOT}/skills/collaboration/brainstorming/SKILL.md`
-2. Wait for result
-3. Follow what it says
-
-**Don't:**
-- Jump straight to code
-- Wait for /brainstorm command
-- Skip brainstorming because you "understand the idea"
-
-**Why:** Jumping into implementation without understanding requirements wastes time. Requirements change, assumptions are wrong, and starting over is expensive. We always brainstorm first.
-
-## Mandatory Workflow 2: Before ANY Task
+## Mandatory Workflow 1: Before ANY Task
 
 **1. Check skills list** at session start, or run `find-skills [PATTERN]` to filter.
 
@@ -53,7 +38,7 @@ When your human partner wants to start a project, no matter how big or small:
 
 Skills exist and you didn't use them = failed task.
 
-## Workflow 3: Historical Context Search (Conditional)
+## Workflow 2: Historical Context Search (Conditional)
 
 **When:** Partner mentions past work, issue feels familiar, starting task in familiar domain, stuck/blocked, before reinventing
 
