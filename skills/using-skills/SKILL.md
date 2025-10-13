@@ -91,8 +91,6 @@ Your human partner's specific instructions describe WHAT to do, not HOW.
 
 ## Summary
 
-**Starting conversation?** You just read using-skills/SKILL.md. Good.
-
 **Starting any task:**
 1. Run find-skills to check for relevant skills
 2. If relevant skill exists → Use Read tool with full path (includes /SKILL.md)
