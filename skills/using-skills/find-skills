@@ -43,7 +43,7 @@ PATTERN="${1:-}"
 # Function to extract when_to_use from SKILL.md
 get_when_to_use() {
     local file="$1"
-    grep "^when_to_use:" "$file" 2>/dev/null | sed 's/when_to_use: *//' || echo ""
+    grep "^when_to_use:" "$file" 2>/dev/null | head -1 | sed 's/when_to_use: *//' || echo ""
 }
 
 # Function to get relative skill path (includes /SKILL.md)
