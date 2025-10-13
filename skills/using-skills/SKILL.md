@@ -16,13 +16,11 @@ version: 4.0.2
 3. **Create TodoWrite todos for checklists.** Mental tracking = steps get skipped. Every time.
 
 
-## Mandatory Workflow 1: Before ANY Task
+## Mandatory Workflow: Before ANY Task
 
 **1. Check skills list** at session start, or run `find-skills [PATTERN]` to filter.
 
-**2. Check if historical context would help** - See Workflow 2. If applicable, dispatch subagent to search past work.
-
-**3. If relevant skill exists, YOU MUST use it:**
+**2. If relevant skill exists, YOU MUST use it:**
 
 - Use Read tool with full path: `${SUPERPOWERS_SKILLS_ROOT}/skills/category/skill-name/SKILL.md`
 - Read ENTIRE file, not just frontmatter
@@ -37,21 +35,6 @@ version: 4.0.2
 **Why:** Skills document proven techniques that save time and prevent mistakes. Not using available skills means repeating solved problems and making known errors.
 
 Skills exist and you didn't use them = failed task.
-
-## Workflow 2: Historical Context Search (Conditional)
-
-**When:** Partner mentions past work, issue feels familiar, starting task in familiar domain, stuck/blocked, before reinventing
-
-**When NOT:** Info in current convo, codebase state questions, first encounter, partner wants fresh thinking
-
-**How (use subagent for 50-100x context savings):**
-1. Dispatch subagent with template: `${SUPERPOWERS_SKILLS_ROOT}/skills/collaboration/remembering-conversations/tool/prompts/search-agent.md`
-2. Receive synthesis (200-1000 words) + source pointers
-3. Apply insights (never load raw .jsonl files)
-
-**Why:** Past conversations contain context, decisions, and lessons learned. Loading raw files wastes 50-100x more context than using a subagent to synthesize.
-
-**Red flags:** Reading .jsonl directly, pasting excerpts, asking "which conversation?", browsing archives
 
 ## Skills with Checklists
 
