@@ -89,12 +89,6 @@ Your human partner's specific instructions describe WHAT to do, not HOW.
 
 **Why:** Specific instructions mean clear requirements, which is when workflows matter MOST. Skipping process on "simple" tasks is how simple tasks become complex problems.
 
-## Writing Skills
-
-Want to document a technique, pattern, or tool for reuse?
-
-See skills/meta/writing-skills/SKILL.md for the complete TDD process for documentation.
-
 ## Summary
 
 **Starting conversation?** You just read using-skills/SKILL.md. Good.
