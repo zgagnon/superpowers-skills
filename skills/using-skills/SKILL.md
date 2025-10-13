@@ -34,7 +34,7 @@ version: 4.0.2
 
 **Why:** Skills document proven techniques that save time and prevent mistakes. Not using available skills means repeating solved problems and making known errors.
 
-Skills exist and you didn't use them = failed task.
+If a skill for your task exists, you must use it or you will fail at your task.
 
 ## Skills with Checklists
 
