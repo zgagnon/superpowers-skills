@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# find-skills - Find and list skills with descriptions
+# find-skills - Find and list skills with when_to_use guidance
 # Shows all skills by default, filters by pattern if provided
 
 set -euo pipefail
@@ -14,10 +14,10 @@ LOG_FILE="${SUPERPOWERS_DIR}/search-log.jsonl"
 # Show help
 if [[ "${1:-}" == "--help" ]] || [[ "${1:-}" == "-h" ]]; then
     cat <<'EOF'
-find-skills - Find and list skills with descriptions
+find-skills - Find and list skills with when_to_use guidance
 
 USAGE:
-  find-skills              Show all skills with descriptions
+  find-skills              Show all skills with when_to_use guidance
   find-skills PATTERN      Filter skills by grep pattern
   find-skills --help       Show this help
 
@@ -27,7 +27,7 @@ EXAMPLES:
   find-skills 'test.*driven|TDD'     # Regex pattern
 
 OUTPUT:
-  Each line shows: skill-path/SKILL.md - description
+  Each line shows: Use skill-path/SKILL.md when [trigger]
   Paths include /SKILL.md for direct use with Read tool
 
 SEARCH:
@@ -40,10 +40,10 @@ fi
 # Get pattern (optional)
 PATTERN="${1:-}"
 
-# Function to extract description from SKILL.md
-get_description() {
+# Function to extract when_to_use from SKILL.md
+get_when_to_use() {
     local file="$1"
-    grep "^description:" "$file" 2>/dev/null | sed 's/description: *//' || echo ""
+    grep "^when_to_use:" "$file" 2>/dev/null | sed 's/when_to_use: *//' || echo ""
 }
 
 # Function to get relative skill path (includes /SKILL.md)
@@ -68,8 +68,8 @@ while IFS= read -r file; do
     [[ -z "$file" ]] && continue
 
     skill_path=$(get_skill_path "$file" "$SKILLS_DIR")
-    description=$(get_description "$file")
-    results+=("$skill_path|$description")
+    when_to_use=$(get_when_to_use "$file")
+    results+=("$skill_path|$when_to_use")
 done < <(
     if [[ -n "$PATTERN" ]]; then
         # Pattern mode: search content and paths
@@ -96,9 +96,9 @@ if [[ ${#results[@]} -eq 0 ]]; then
 fi
 
 # Sort and display results
-printf "%s\n" "${results[@]}" | sort | while IFS='|' read -r skill_path description; do
-    if [[ -n "$description" ]]; then
-        echo "$skill_path - $description"
+printf "%s\n" "${results[@]}" | sort | while IFS='|' read -r skill_path when_to_use; do
+    if [[ -n "$when_to_use" ]]; then
+        echo "Use $skill_path $when_to_use"
     else
         echo "$skill_path"
     fi
