@@ -28,7 +28,7 @@ shift  # Remove script path from args, leaving remaining args
 
 # Determine directories
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SKILLS_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+SKILLS_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 
 # Try to run the script
 SCRIPT="${SKILLS_ROOT}/${SCRIPT_PATH}"
