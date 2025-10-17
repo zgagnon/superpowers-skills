@@ -11,6 +11,8 @@ Git worktrees create isolated workspaces sharing the same repository, allowing w
 
 **Core principle:** Systematic directory selection + safety verification = reliable isolation.
 
+**IMPORTANT: Check for `.jj` directory first.** If `.jj` exists, use jj instead of git worktrees. See using-jj-vcs skill. Jj has built-in change management that's more powerful than worktrees.
+
 **Announce at start:** "I'm using the Using Git Worktrees skill to set up an isolated workspace."
 
 ## Directory Selection Process
@@ -190,6 +192,7 @@ Ready to implement auth feature
 ## Red Flags
 
 **Never:**
+- Use git worktrees when `.jj` directory exists (use jj instead)
 - Create worktree without .gitignore verification (project-local)
 - Skip baseline test verification
 - Proceed with failing tests without asking
@@ -197,6 +200,7 @@ Ready to implement auth feature
 - Skip CLAUDE.md check
 
 **Always:**
+- Check for `.jj` directory first (if exists, use using-jj-vcs skill instead)
 - Follow directory priority: existing > CLAUDE.md > ask
 - Verify .gitignore for project-local
 - Auto-detect and run project setup
