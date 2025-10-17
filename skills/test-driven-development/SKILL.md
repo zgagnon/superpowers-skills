@@ -70,6 +70,20 @@ digraph tdd_cycle {
 
 ### RED - Write Failing Test
 
+**PREREQUISITE: All existing tests must be green before writing a new test.**
+
+If any test is failing, you MUST complete the GREEN phase for that test first. Do not write new tests while existing tests are failing.
+
+**No exceptions:**
+- Not "just one more test"
+- Not "while I'm in test-writing mode"
+- Not "these are related features"
+- Not "I'll implement both together"
+
+Fix the failing test first. Then write the next test.
+
+---
+
 Write one minimal test showing what should happen.
 
 <Good>
@@ -268,6 +282,9 @@ Tests-first force edge case discovery before implementing. Tests-after verify yo
 | "TDD will slow me down" | TDD faster than debugging. Pragmatic = test-first. |
 | "Manual test faster" | Manual doesn't prove edge cases. You'll re-test every change. |
 | "Existing code has no tests" | You're improving it. Add tests for existing code. |
+| "I'm in test-writing mode" | Complete the cycle. Fix failing test before writing new one. |
+| "Just one more test" | No. All tests must be green before writing next test. |
+| "Related features, test together" | One test at a time. One cycle at a time. Period. |
 
 ## Red Flags - STOP and Start Over
 
@@ -276,6 +293,10 @@ Tests-first force edge case discovery before implementing. Tests-after verify yo
 - Test passes immediately
 - Can't explain why test failed
 - Tests added "later"
+- Writing new test while existing tests failing
+- "I'm in test-writing mode, let me write another"
+- "Just one more test while I'm thinking about it"
+- "These features are related, I'll test together"
 - Rationalizing "just this once"
 - "I already manually tested it"
 - "Tests after achieve the same purpose"
