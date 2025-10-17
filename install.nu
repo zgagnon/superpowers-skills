@@ -5,6 +5,7 @@
 
 def main [] {
     let skills_source = $env.HOME | path join "superpowers-skills" "skills"
+    let commands_source = $env.HOME | path join "superpowers-skills" "commands"
     let claude_skills = $env.HOME | path join ".claude" "skills"
     let claude_commands = $env.HOME | path join ".claude" "commands"
 
@@ -35,7 +36,7 @@ def main [] {
         if ($target | path exists) {
             # Check if it's a symlink pointing to our source
             if ($target | path type) == "symlink" {
-                let link_target = ls -l $target | get target.0
+                let link_target = (readlink $target | str trim)
                 if $link_target == $skill_dir {
                     print $"  ✓ ($skill_name) - already linked"
                     continue
@@ -60,8 +61,7 @@ def main [] {
 
     print ""
 
-    # Install command files from skills/commands directory
-    let commands_source = $skills_source | path join "commands"
+    # Install command files from commands directory
     if ($commands_source | path exists) {
         print "Linking command files:"
         let command_files = ls $commands_source
@@ -79,7 +79,7 @@ def main [] {
             if ($target | path exists) {
                 # Check if it's a symlink pointing to our source
                 if ($target | path type) == "symlink" {
-                    let link_target = ls -l $target | get target.0
+                    let link_target = (readlink $target | str trim)
                     if $link_target == $command_file {
                         print $"  ✓ ($command_name) - already linked"
                         continue
