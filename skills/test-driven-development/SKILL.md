@@ -84,7 +84,15 @@ Fix the failing test first. Then write the next test.
 
 ---
 
-Write one minimal test showing what should happen.
+Write **ONE** minimal test showing what should happen.
+
+**ONE means ONE:**
+- Not two related tests
+- Not "test the happy path and edge case together"
+- Not "these behaviors are related, test both"
+- Not "being thorough by covering multiple aspects"
+
+Write a single test for a single behavior. Run it. Make it pass. Then write the next test.
 
 <Good>
 ```typescript
@@ -285,6 +293,9 @@ Tests-first force edge case discovery before implementing. Tests-after verify yo
 | "I'm in test-writing mode" | Complete the cycle. Fix failing test before writing new one. |
 | "Just one more test" | No. All tests must be green before writing next test. |
 | "Related features, test together" | One test at a time. One cycle at a time. Period. |
+| "These behaviors are related" | Still write one test. Run it. Pass it. Then next test. |
+| "Being thorough with multiple tests" | Thorough = one test at a time, fully completed. Not batching. |
+| "Happy path and edge case together" | No. One test. One behavior. One cycle. |
 
 ## Red Flags - STOP and Start Over
 
@@ -293,10 +304,13 @@ Tests-first force edge case discovery before implementing. Tests-after verify yo
 - Test passes immediately
 - Can't explain why test failed
 - Tests added "later"
+- Writing multiple tests before running any
 - Writing new test while existing tests failing
 - "I'm in test-writing mode, let me write another"
 - "Just one more test while I'm thinking about it"
 - "These features are related, I'll test together"
+- "Being thorough by writing multiple tests upfront"
+- "Test happy path and edge case together"
 - Rationalizing "just this once"
 - "I already manually tested it"
 - "Tests after achieve the same purpose"
