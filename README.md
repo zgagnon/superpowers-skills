@@ -26,7 +26,7 @@ If you use Jujutsu (jj) version control, add this hook to your `~/.claude/settin
         "hooks": [
           {
             "type": "command",
-            "command": "if echo \"$CLAUDE_TOOL_PARAMS\" | jq -r '.command // empty' | grep -qE '^git (add|commit|status|diff|log|push|pull|checkout|branch|merge|rebase)'; then if [ -d .jj ]; then echo '⚠️  BLOCKED: .jj directory detected. This is a jj repository. Use jj commands instead of git.' >&2; exit 1; fi; fi"
+            "command": "if echo \"$CLAUDE_TOOL_PARAMS\" | jq -r '.command // empty' | grep -qE '^git (add|commit|status|diff|log|push|pull|checkout|branch|merge|rebase)'; then if jj root >/dev/null 2>&1; then echo '⚠️  BLOCKED: jj repository detected. Use jj commands instead of git.' >&2; exit 1; fi; fi"
           }
         ]
       }
@@ -38,7 +38,7 @@ If you use Jujutsu (jj) version control, add this hook to your `~/.claude/settin
 This hook:
 - Runs before any Bash command executes
 - Detects git commands (add, commit, status, diff, log, push, pull, checkout, branch, merge, rebase)
-- Checks if a `.jj` directory exists in the current directory
+- Checks if this is a jj repository by running `jj root`
 - Blocks the command with a clear error message if both conditions are true
 
 This provides system-level protection that works alongside the `using-jj-vcs` and `jj-change-workflow` skills.

@@ -145,7 +145,15 @@ Confirm:
 - Failure message is expected
 - Fails because feature missing (not typos)
 
-**Test passes?** You're testing existing behavior. Fix test.
+**Test passes immediately?** You're testing existing behavior or redundant functionality. Delete the test and write a different one that forces implementation.
+
+**Examples of tests to delete:**
+- Testing struct creation when struct already compiles
+- Testing getters/setters that are auto-generated
+- Testing default constructors
+- Testing behavior that already exists
+
+If you can't think of a test that fails, you don't need new code yet.
 
 **Test errors?** Fix error, re-run until it fails correctly.
 
@@ -296,12 +304,19 @@ Tests-first force edge case discovery before implementing. Tests-after verify yo
 | "These behaviors are related" | Still write one test. Run it. Pass it. Then next test. |
 | "Being thorough with multiple tests" | Thorough = one test at a time, fully completed. Not batching. |
 | "Happy path and edge case together" | No. One test. One behavior. One cycle. |
+| "It's a simple starting point" | Tests that pass immediately don't force design. Delete and test real behavior. |
+| "Test creation is valid" | If struct already compiles, creation test is redundant. Test actual behavior. |
+| "At least I'm following TDD" | Following ritual without forcing implementation = not TDD. Delete passing tests. |
 
 ## Red Flags - STOP and Start Over
 
 - Code before test
 - Test after implementation
 - Test passes immediately
+- Test doesn't force any implementation
+- Testing struct creation when struct already compiles
+- "It's a simple starting point"
+- "Test creation is valid"
 - Can't explain why test failed
 - Tests added "later"
 - Writing multiple tests before running any

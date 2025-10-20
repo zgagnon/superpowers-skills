@@ -13,6 +13,32 @@ description: Use when starting any conversation - establishes mandatory workflow
 
 ## Mandatory: Before ANY Task
 
+### The Skill Discovery Checklist
+
+For EVERY user request, create these TodoWrite todos BEFORE any other action:
+
+1. **Check available skills** (Look at Skill tool's available skills list)
+2. **Match task to skills** (Does user's request match any skill's description?)
+3. **If match found: Read the skill** (Use Read tool on skill file)
+4. **If match found: Announce usage** ("I'm using [Skill] to [purpose]")
+5. **Proceed with task** (Follow skill if found, or proceed directly)
+
+**Create ALL five todos immediately. Mark them as you go.**
+
+**Multiple tasks?** If user provides multiple distinct tasks (e.g., "Add auth, fix tests, write docs"), the FIRST task gets the 5-step checklist. After completing task 1, when you start task 2, you repeat the checklist. Each distinct task triggers skill discovery independently.
+
+**Don't rationalize:**
+- "I already know the skills" - The list grows. Check every time.
+- "This will slow me down" - 10 seconds now vs hours debugging later.
+- "I need context first" - Check skills THEN gather context.
+- "This is too simple" - Simple tasks are where agents skip skills most.
+- "I'll check if I get stuck" - By then you've already gone down wrong path.
+- "Skills are for complex problems" - Skills apply to ALL matching problems.
+- "The user wants speed" - Following proven approaches IS speed.
+- "I'll batch skill checking for all tasks" - Each task needs independent discovery.
+
+**Why this checklist matters:** Without external forcing function, agents skip skill discovery 80%+ of the time. TodoWrite makes it structurally impossible to skip.
+
 **1. If a relevant skill exists, YOU MUST use it:**
 
 - Announce: "I've read [Skill Name] skill and I'm using it to [purpose]"

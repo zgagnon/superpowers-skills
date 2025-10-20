@@ -10,12 +10,12 @@ description: Use when starting any task - checks if repository uses jj and estab
 **Before anything else, check if this is a jj repository:**
 
 ```bash
-ls -la .jj
+jj root 2>&1 | grep -q "There is no jj repo" && echo "Not a jj repo" || echo "Is a jj repo"
 ```
 
-**If `.jj` directory exists:** Continue with this workflow below.
+**If output says "Is a jj repo":** Continue with this workflow below.
 
-**If `.jj` directory does NOT exist:** This skill doesn't apply. Stop here and proceed with your task.
+**If output says "Not a jj repo":** This skill doesn't apply. Stop here and proceed with your task.
 
 ## Overview
 
