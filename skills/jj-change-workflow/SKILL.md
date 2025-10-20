@@ -1,9 +1,21 @@
 ---
 name: JJ-Change-Workflow
-description: Use when working in jj repositories before starting any work - establishes the examine-commit-work-squash cycle that keeps changes organized and prevents lost work
+description: Use when starting any task - checks if repository uses jj and establishes the examine-commit-work-squash cycle that keeps changes organized and prevents lost work
 ---
 
 # JJ Change Workflow
+
+## First: Check if This Skill Applies
+
+**Before anything else, check if this is a jj repository:**
+
+```bash
+ls -la .jj
+```
+
+**If `.jj` directory exists:** Continue with this workflow below.
+
+**If `.jj` directory does NOT exist:** This skill doesn't apply. Stop here and proceed with your task.
 
 ## Overview
 

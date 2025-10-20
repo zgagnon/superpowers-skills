@@ -41,8 +41,8 @@ def main [] {
                     print $"  ✓ ($skill_name) - already linked"
                     continue
                 } else {
-                    print $"  ⚠ ($skill_name) - exists but points to different location: ($link_target)"
-                    continue
+                    print $"  ↻ ($skill_name) - relinking from ($link_target) to ($skill_dir)"
+                    rm $target
                 }
             } else {
                 print $"  ⚠ ($skill_name) - exists but is not a symlink, skipping"
@@ -72,33 +72,41 @@ def main [] {
         for command_file in $command_files {
             let command_basename = $command_file | path basename
             let command_name = $command_basename | str replace '.md' ''
-            let prefixed_name = $"superpowers:($command_name).md"
-            let target = $claude_commands | path join $prefixed_name
 
-            # Check if target already exists
-            if ($target | path exists) {
-                # Check if it's a symlink pointing to our source
-                if ($target | path type) == "symlink" {
-                    let link_target = (readlink $target | str trim)
-                    if $link_target == $command_file {
-                        print $"  ✓ ($command_name) - already linked"
-                        continue
+            # Create both prefixed and unprefixed versions
+            let versions = [
+                {name: $command_name, filename: $command_basename},
+                {name: $"superpowers:($command_name)", filename: $"superpowers:($command_name).md"}
+            ]
+
+            for version in $versions {
+                let target = $claude_commands | path join $version.filename
+
+                # Check if target already exists
+                if ($target | path exists) {
+                    # Check if it's a symlink pointing to our source
+                    if ($target | path type) == "symlink" {
+                        let link_target = (readlink $target | str trim)
+                        if $link_target == $command_file {
+                            print $"  ✓ ($version.name) - already linked"
+                            continue
+                        } else {
+                            print $"  ↻ ($version.name) - relinking from ($link_target) to ($command_file)"
+                            rm $target
+                        }
                     } else {
-                        print $"  ⚠ ($command_name) - exists but points to different location: ($link_target)"
+                        print $"  ⚠ ($version.name) - exists but is not a symlink, skipping"
                         continue
                     }
-                } else {
-                    print $"  ⚠ ($command_name) - exists but is not a symlink, skipping"
-                    continue
                 }
-            }
 
-            # Create the symlink
-            try {
-                ln -s $command_file $target
-                print $"  + ($command_name) - linked"
-            } catch {
-                print $"  ✗ ($command_name) - failed to create symlink"
+                # Create the symlink
+                try {
+                    ln -s $command_file $target
+                    print $"  + ($version.name) - linked"
+                } catch {
+                    print $"  ✗ ($version.name) - failed to create symlink"
+                }
             }
         }
     }
