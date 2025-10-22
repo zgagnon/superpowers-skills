@@ -9,7 +9,7 @@ description: Use when starting any conversation - establishes mandatory workflow
 
 1. **Follow mandatory workflows.** Brainstorming before coding. Check for relevant skills before ANY task.
 
-2. Execute skills with the Skill tool
+2. **Skills are documentation, not commands.** Read skills with the Read tool (`skills/skill-name/SKILL.md`). A few skills have slash commands (`/superpowers:brainstorm`, `/superpowers:write-plan`, `/superpowers:execute-plan`) but most don't - you read and follow them directly
 
 ## Mandatory: Before ANY Task
 

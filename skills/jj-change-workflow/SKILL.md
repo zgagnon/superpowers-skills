@@ -28,7 +28,7 @@ This workflow ensures every piece of work has clear intent before you start, and
 ## The Cycle
 
 ```
-1. jj log              # Check if in empty change
+1. jj status           # Check if in empty change (no files = empty)
 2. jj commit -m "X"    # Create empty change with work description
    OR jj new + jj commit if not in empty change
 3. [work]              # Make changes, run tests, experiment
@@ -36,26 +36,35 @@ This workflow ensures every piece of work has clear intent before you start, and
 5. Repeat              # Back to step 1 for next work
 ```
 
-**Every work session starts with `jj log`. Every time.**
+**Every work session starts with `jj status`. Every time.**
 
 ## The Four Steps
 
-### 1. Examine: Always Check jj log First
+### 1. Examine: Always Check Status First
 
-**Before ANY work, run `jj log` to see if you're in an empty change.**
+**Before ANY work, run `jj status` to see if you're in an empty change.**
 
-Empty change indicators:
-- No files listed in the change
-- Description might say "(no description set)"
-- Very recent timestamp
+**Empty change means: no tracked files in working change.**
+
+Run `jj status`. You're in an empty change if:
+- Output contains "No changes" OR
+- Output shows "Working copy changes:" with no files listed below OR
+- Output shows "Working copy: (no changes)"
+
+You're NOT in empty change if any tracked files are listed (M, A, D, R).
+
+Untracked files don't count - only tracked changes matter.
+
+The description "(no description set)" does NOT mean empty - check for actual file changes.
 
 **Don't rationalize:**
 - "This is urgent, skip ceremony" → NO, takes 2 seconds
 - "Production is down, every second counts" → NO, workflow is 5 seconds vs hours debugging lost work
 - "Task is simple, don't need context" → NO, checking state prevents mistakes
-- "I know I'm in empty change" → NO, always verify
-- "Looking at log would be procrastination" → NO, prevents costly mistakes, takes 1 second
+- "I know I'm in empty change" → NO, always verify with `jj status`
+- "Looking at status would be procrastination" → NO, prevents costly mistakes, takes 1 second
 - "Process should serve goals, not vice versa" → NO, this process IS the goal (clean history, no lost work)
+- "I see '(no description set)' so it's empty" → NO, check files with `jj status`, not description
 
 ### 2. Commit: Describe Work Before Starting
 
@@ -91,46 +100,68 @@ Worth keeping means:
 
 **`jj squash` moves your changes to the parent commit (the one with your work description).**
 
+**IMPORTANT:** Every time you squash work into a parent commit that already has changes, update the parent commit message to describe ALL accumulated work, not just the most recent changes.
+
+Use `jj describe -m "Updated message describing all changes"` on the parent commit to keep the message accurate.
+
 After squashing, you're in a new empty change. Return to step 1.
 
 ## Quick Reference
 
 | Situation | Command | Why |
 |-----------|---------|-----|
-| Starting any work | `jj log` | Check if in empty change |
+| Starting any work | `jj status` | Check if in empty change (no files) |
 | In empty change | `jj commit -m "Intent"` | Describe work before starting |
 | Not in empty change | `jj new` then `jj commit -m "Intent"` | Create + describe |
 | Made progress worth keeping | `jj squash` | Save work to parent |
-| Starting next piece of work | Back to `jj log` | Check state again |
+| Continuing same feature | `jj describe -m "..."` on parent | Update message to describe ALL accumulated work |
+| Starting next piece of work | Back to `jj status` | Check state again |
 
 ## Real-World Examples
 
 **Bug fix:**
 ```bash
-jj log                                # Check state
+jj status                             # Check state - no tracked files = empty
+# Output: "Working copy changes:\n(no changes)"  ← empty!
 jj commit -m "Fix type error in utils.ts line 42"
 # Edit the file
 # Run tests - they pass
 jj squash                            # Save the fix
 ```
 
-**Feature work (multi-step):**
+**Feature work (multi-step on same commit):**
 ```bash
-jj log                                # Check state
+jj status                             # Check state - no files = empty
 jj commit -m "Add user authentication"
 # Create auth.ts, add login()
 # Tests pass
 jj squash                            # Save login work
-jj log                                # Now in empty change again
-jj commit -m "Add logout to authentication"
+jj describe -m "Add user authentication: login"  # Update parent to reflect what's done
+jj status                             # Now in empty change again
+jj commit -m "Add logout"
 # Add logout()
 # Tests pass
 jj squash                            # Save logout work
+jj describe -m "Add user authentication: login and logout"  # Update to reflect ALL work
+# Continue pattern: work → squash → update description
+```
+
+**Feature work (separate commits):**
+```bash
+jj status
+jj commit -m "Add user authentication: login"
+# Implement login
+jj squash
+# This commit is complete, start a new one
+jj new
+jj commit -m "Add user authentication: logout"
+# Implement logout
+jj squash
 ```
 
 **Investigation:**
 ```bash
-jj log
+jj status
 jj commit -m "Investigate flaky test in auth module"
 # Try different things, add logging, document findings
 # Understanding achieved, notes written
@@ -143,7 +174,7 @@ jj squash                            # Save the investigation results
 
 **The workflow takes 5 seconds:**
 ```bash
-jj log                           # 1 second
+jj status                        # 1 second
 jj commit -m "Fix prod typo"     # 2 seconds
 # make the fix                   # (time you'd spend anyway)
 jj squash                        # 1 second
@@ -163,11 +194,15 @@ jj squash                        # 1 second
 
 | Mistake | Fix |
 |---------|-----|
-| Skip `jj log` before starting | ALWAYS run `jj log` first. No exceptions. |
+| Skip `jj status` before starting | ALWAYS run `jj status` first. No exceptions. |
 | Start editing without committing description first | Stop. Run `jj commit -m "what I'm doing"` first. |
 | Use `jj describe` to name work after editing | Wrong order. Commit with description BEFORE editing. |
+| Check description instead of files to determine "empty" | Wrong indicator. Use `jj status` - no tracked files = empty. |
+| Use `jj diff` to check if change is empty | Wrong tool. Use `jj status` - no tracked files = empty. |
+| Count untracked files as "non-empty" | Wrong. Only tracked changes matter. Untracked files don't prevent empty. |
 | Never use `jj squash` | You'll lose work. Squash when tests pass or goal achieved. |
 | Use `jj commit` repeatedly as checkpoints | Wrong pattern. Use squash for incremental work. |
+| Squash without updating parent message | Parent message becomes stale. Use `jj describe` to reflect ALL changes. |
 | "Task is urgent so skip the workflow" | Workflow takes 5 seconds. Losing work takes hours. |
 | "Production emergency, process doesn't matter" | Process takes 5 seconds. Prevents costly mistakes under pressure. |
 | "Fix now, clean up commits later" | Never works. You forget or mess it up. Do it right the first time. |
@@ -193,8 +228,14 @@ Leave the work in the working change and either continue or `jj restore` to disc
 ## Red Flags
 
 **STOP if you catch yourself:**
-- Starting work without `jj log`
+- Starting work without `jj status`
 - Editing files before committing description
+- Using description "(no description set)" to determine empty change
+- Checking `jj log` instead of `jj status` for empty change
+- Using `jj diff` instead of `jj status` to check for empty change
+- Visually inspecting `jj log` output to determine empty
+- Squashing without updating parent message to reflect ALL changes
+- "This is a different piece of work" to skip message update
 - Rationalizing "too urgent for workflow"
 - Thinking "production emergency, skip process"
 - Planning to "fix now, clean up commits later"

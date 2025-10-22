@@ -398,6 +398,12 @@ Can't check all boxes? You skipped TDD. Start over.
 | Must mock everything | Code too coupled. Use dependency injection. |
 | Test setup huge | Extract helpers. Still complex? Simplify design. |
 
+## Tracking Multi-Test Features
+
+For features requiring multiple TDD cycles, use Discovery Trees (bd) to track progress. See discovery-tree-workflow skill for details.
+
+**Pattern:** Each bd task contains multiple RED-GREEN-REFACTOR cycles.
+
 ## Debugging Integration
 
 Bug found? Write failing test reproducing it. Follow TDD cycle. Test proves fix and prevents regression.

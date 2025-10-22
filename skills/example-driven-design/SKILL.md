@@ -40,7 +40,14 @@ Discover design through examples. Start from a user story, write wished-for API 
 ```
 NO IMPLEMENTATION WITHOUT EXAMPLES FIRST
 NO PROGRESSION WITHOUT COMPLETING ALL PHASES
+WRITE ONE TEST AT A TIME - NOT MULTIPLE TESTS
 ```
+
+**Why one test at a time matters:**
+- Each test forces the code to change
+- REFACTOR phase makes the code easier to change
+- Next test builds on more adaptable code
+- Multiple tests skip this evolution - you write rigid code that's hard to extend
 
 ## The Cycle
 
@@ -57,18 +64,19 @@ Each phase MUST be completed before proceeding to the next.
 
 Write example code showing how you wish the API worked.
 
-**Checklist (use TodoWrite for each item):**
+**Checklist (create bd subtasks for each item):**
 
-- [ ] **Understand user story** - Ask your human partner to clarify acceptance criteria if unclear
+- [ ] **STOP: Discuss story with partner FIRST** - Before writing examples, tests, or ANY code, ask partner: "Can you describe 2-3 specific scenarios where this will be used?" Do NOT proceed until partner responds. Even "obvious" features have hidden requirements.
 - [ ] **Write wished-for usage code** - Write 2-3 different API designs, ignoring implementation constraints
 - [ ] **Present alternatives to partner** - Show the different API shapes you explored: "Here are 3 ways we could design this API. Which feels most natural?"
 - [ ] **Iterate based on feedback** - Refine the chosen design with partner input
 - [ ] **Show final example to partner** - "Does this example clearly show what the feature should do?"
-- [ ] **Convert to test** - Add assertions and wrap in test function
+- [ ] **Convert to ONE test** - Add assertions and wrap in test function (write ONE test, not multiple)
 - [ ] **Confirm test structure with partner** - "This test captures the example. Ready to proceed to RED phase?"
 
 **Key conversations:**
-- "What does this feature need to do?" (clarifying story)
+- "Can you describe 2-3 specific scenarios where this will be used?" (FIRST - before ANY examples)
+- "What defines 'done' for this story?" (understanding acceptance criteria)
 - "Here are 3 API designs - which feels clearest?" (exploring alternatives)
 - "Does this example feel natural to use?" (validating design)
 
@@ -117,7 +125,9 @@ Follow TDD skill RED phase exactly.
 
 **REQUIRED SUB-SKILL:** Use superpowers:test-driven-development for RED phase details.
 
-**Checklist (use TodoWrite for each item):**
+**CRITICAL:** Write ONE test, not multiple. Each test must go through full cycle before writing next test.
+
+**Checklist (create bd subtasks for each item):**
 
 - [ ] **Run the test** - Execute the test you just wrote
 - [ ] **Verify it fails correctly** - Confirm failure message is expected (e.g., "function not defined")
@@ -127,13 +137,18 @@ Follow TDD skill RED phase exactly.
 **Key conversation:**
 - "Test fails as expected - ready to implement minimal code?"
 
+**Why verify test fails:**
+- Proves test can detect the problem (not permanently passing)
+- Confirms you're testing the right thing
+- Wrong failure = misunderstood requirement, fix test now before implementing
+
 ### Phase 3: GREEN - Minimal Implementation
 
 Follow TDD skill GREEN phase exactly.
 
 **REQUIRED SUB-SKILL:** Use superpowers:test-driven-development for GREEN phase details.
 
-**Checklist (use TodoWrite for each item):**
+**Checklist (create bd subtasks for each item):**
 
 - [ ] **Write minimal implementation** - Simplest code to pass the test, no extra features
 - [ ] **Run test** - Confirm it passes
@@ -144,13 +159,19 @@ Follow TDD skill GREEN phase exactly.
 **Key conversation:**
 - "Implementation is minimal and tests pass - ready for REFACTOR phase?"
 
+**Why minimal implementation:**
+- Avoids premature decisions about code you don't need yet
+- Leaves maximum flexibility for REFACTOR phase to reshape code
+- Prevents feature creep - YAGNI violations make code harder to change
+- Next test's pressure reveals what's actually needed
+
 ### Phase 4: REFACTOR - Design Critique and Evolution
 
 **MANDATORY. This is where example-driven design differs from TDD.**
 
 After tests pass, perform design critique to enable architectural evolution.
 
-**Checklist (use TodoWrite for each item):**
+**Checklist (create bd subtasks for each item):**
 
 - [ ] **Critique current design** - Examine against SRP, DRY, coupling, complexity
 - [ ] **Share critique with partner** - "Looking at the current design: [observations]. Here are potential improvements..."
@@ -205,13 +226,19 @@ class Authenticator {
 - Must consciously critique design after every cycle
 - Missing this = treating skill like plain TDD
 
+**Why mandatory refactoring after every cycle:**
+- Each test reveals something about the design (patterns, pain points, missing abstractions)
+- Refactoring now (1 test) is easier than later (10 tests locked into rigid structure)
+- Makes code ready to adapt when next test demands different shape
+- Skipping refactoring = accumulating design debt that makes later tests fight the code
+
 ### Phase 5: CHECK - Done or Recurse
 
 **MANDATORY. Creates self-reinforcing loop.**
 
 After REFACTOR, check if work is complete.
 
-**Checklist (use TodoWrite for each item):**
+**Checklist (create bd subtasks for each item):**
 
 - [ ] **List acceptance criteria** - Write out all criteria from the user story
 - [ ] **Mark coverage** - Which criteria are covered by examples so far?
@@ -274,6 +301,12 @@ Can't check all boxes? You violated the process. Review and fix.
 If you catch yourself thinking:
 
 **EXAMPLE phase violations:**
+- "I know what this feature means" → ASK partner for specific scenarios anyway
+- "This story is obvious" → Hidden assumptions cause rework, discuss first
+- "I don't want to waste partner's time" → Assumptions waste MORE time
+- "I'll discover details through examples" → Get scenarios from partner FIRST
+- "I'll ask about scenarios while showing examples" → Get scenarios BEFORE writing, not during
+- "I'll show examples and ask if they match" → Design direction already set, too late
 - "I know what API I want" → You're assuming, not exploring
 - "Skip to test" → Missing design discovery
 - "First design is fine" → Didn't iterate on API
@@ -281,6 +314,9 @@ If you catch yourself thinking:
 - "Start with the data structure" → Implementation before API exploration
 - "Start with the basics" → You're coding before designing
 - "Create the class first" → Skipped EXAMPLE phase
+- "Write tests for all operations" → ONE test at a time, not multiple
+- "Feature has multiple operations" → Each operation needs its own cycle
+- "Tests cover distinct behaviors" → Still ONE test per cycle
 
 **RED/GREEN violations (inherit from TDD):**
 - Code before test fails
@@ -309,6 +345,9 @@ If you catch yourself thinking:
 
 | Excuse | Reality |
 |--------|---------|
+| "I understand what this story means" | You're assuming. Ask partner for 2-3 specific scenarios first. |
+| "Story is obvious, skip discussion" | Hidden assumptions cause rework. Discuss with partner FIRST. |
+| "I'll discover requirements through examples" | Get scenarios from partner before writing examples. |
 | "I know the API already" | First idea rarely best. Explore alternatives. |
 | "Example phase is just writing test" | No. Example explores design, test adds assertions. |
 | "Start with the data structure/basics" | You're implementing before exploring API. Skipped EXAMPLE phase. |
@@ -320,6 +359,10 @@ If you catch yourself thinking:
 | "Simple, clean, production-ready" without critique | You haven't examined alternatives or considered evolution. |
 | "Write comprehensive tests" after implementation | Tests after don't discover design. Examples first, then tests. |
 | "Design is obvious from user story" | If obvious, examples will be quick. If not, you need this. |
+| "Feature has multiple operations, so multiple tests" | ONE test per cycle. Each operation needs full cycle. |
+| "Tests cover distinct behaviors" | Doesn't matter. Write ONE test, complete cycle, then next test. |
+| "The skill example shows one test but my case is different" | All cases require ONE test at a time for iterative pressure. |
+| "Operations are interdependent, so one test" | Each operation still needs its own cycle. Use first operation's result in next cycle's test. |
 | "Ready for production" without CHECK | Must explicitly verify acceptance criteria coverage. |
 | "All tests pass" means done | Tests passing ≠ acceptance criteria met. Must CHECK explicitly. |
 | "Can skip CHECK, I know what's left" | Explicit criteria check prevents premature completion. |
